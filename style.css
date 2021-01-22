@@ -1,0 +1,75 @@
+.asb-button-right{
+    text-align: end;
+    padding-left: 0rem;
+    padding-right: 0.3rem;
+}
+
+.asb-row-add-margin-button{
+    border-bottom: 1px solid #dee2e6;
+}
+
+.asb-remove-padding-right{
+    padding-right: 0px;
+}
+
+.asb-min-width{
+    min-width: 992px;
+}
+
+.asb-align-center{
+    text-align: center;
+}
+
+.asb-top-border th{
+    border-top: 0px solid #dee2e6;
+}
+
+.asb-tab-font{
+    font-size: .875rem;
+}
+
+.asb-tab-padding{
+    padding-top: 5px;
+}
+
+@media (min-width: 992px){
+    .asb-container{
+        max-width: 992px;
+    }
+}
+
+@media (min-height: 200px){
+    .asb-canvas{
+        width:350px;
+        height:auto;
+    }
+    .asb-modal-height{
+        max-height: 300px;
+    }
+}
+
+.asb-modal-separate-line{    
+    border-right-style: solid;
+    border-right-color: #e9ecef;
+}
+
+/* Credit to:
+ * https://stackoverflow.com/questions/24840074/how-to-stick-table-headerthead-on-top-while-scrolling-down-the-table-rows-with
+ */
+thead tr:nth-child(1) th {
+    background: white;
+    position: sticky;
+    top: 0;
+    z-index: 10;
+}
+
+html { 
+    height:100%;
+}
+body { 
+    min-height:100%;
+}
+
+.table-height{
+    max-height: calc(100vh - 450px) !important;
+}

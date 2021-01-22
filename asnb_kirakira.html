@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="/bootstrap_4.3.1/css/bootstrap.min.css" type="text/css">
+    
+    <!-- Chart JS -->
+    <script src="/node_modules/chart.js/dist/Chart.bundle.js"></script>
+    <script src="/util.js"></script>
+
+    <link rel="stylesheet" href="/style.css" type="text/css">
+    <title>ASB Calculation</title>
+</head>
+<body>    
+    <div class="container asb-container">
+        <div class="row asb-min-width">
+            <canvas id="canvas" style="width: 400px; height:auto;" aria-label="ASB Chart" role="img"></canvas>
+        </div>
+        <div class="row asb-min-width asb-tab-padding">
+            <nav class="col-6 asb-remove-padding-right">
+                <div class="nav nav-tabs asb-tab-font" id="nav-tab" role="tablist">
+                    <a class="nav-item nav-link active" id="nav-compounding-tab" data-toggle="tab" href="#nav-compounding" role="tab" aria-controls="nav-compounding" aria-selected="true">Compounding</a>
+                    <a class="nav-item nav-link" id="nav-rolling-tab" data-toggle="tab" href="#nav-rolling" role="tab" aria-controls="nav-rolling" aria-selected="false">Rolling</a>
+                    <a class="nav-item nav-link" id="nav-without-loan-tab" data-toggle="tab" href="#nav-without-loan" role="tab" aria-controls="nav-without-loan" aria-selected="false">Without loan</a>
+                </div>
+            </nav>
+            <div class="col-6 asb-row-add-margin-button">
+                <div class="asb-button-right">
+                    <button id="button_dividend" type="button" class="btn btn-outline-secondary btn-sm" data-toggle="modal" data-target="#modal-asb-dividend">ASB Dividend</button>
+                    <button id="button_add" type="button" class="btn btn-outline-secondary btn-sm">Add Row</button>
+                    <button id="button_save" type="button" class="btn btn-outline-secondary btn-sm">Save</button>
+                    <button id="button_show_default" type="button" class="btn btn-outline-secondary btn-sm">Show Default</button>
+                    <button id="button_update_chart" type="button" class="btn btn-outline-primary btn-sm">Update Chart</button>
+                </div>
+            </div>
+        </div>
+        
+        <div class="row asb-min-width">
+            <div class="tab-content" id="nav-tabContent">
+                <div class="tab-pane fade show active" id="nav-compounding" role="tabpanel" aria-labelledby="nav-compounding-tab">
+                    <div class="col table-responsive table-height">
+                        <table id="table" class="table table-sm table-hover overflow-auto">
+                            <thead>
+                                <tr class="asb-top-border" style="font-size:small;">
+                                    <th width="4%" scope="col">#</th>
+                                    <th width="3%" scope="col">Show</th>
+                                    <th width="18%" scope="col">Loan amount</th>
+                                    <th width="12%" scope="col">Insurance amount</th>
+                                    <th width="6%" scope="col">Profit rate</th>
+                                    <th width="8%" scope="col">Tenure (years)</th>
+                                    <th width="10%" scope="col">Start year</th>
+                                    <th width="7%" scope="col">Start month</th>
+                                    <th width="6%" scope="col">Investment period</th>
+                                    <th width="14%" scope="col">Monthly payment</th>
+                                    <th width="6%" scope="col"></th>
+                                    <th width="6%" scope="col"></th>
+                                </tr>
+                            </thead>
+                            <tbody id="table_body">
+                                <tr>
+                                    <th scope="row">1</th>
+                                    <td class="asb-align-center">
+                                        <input id="show_1" type="checkbox" checked>
+                                    </td>
+                                    <td>
+                                        <div class="input-group input-group-sm">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text">RM</span>
+                                            </div>
+                                            <select id="loan_amount_option_1" class="custom-select" disabled>
+                                                    <option>0</option>
+                                                    <option>10000</option>
+                                                    <option>15000</option>
+                                                    <option>20000</option>
+                                                    <option>25000</option>
+                                                    <option>30000</option>
+                                                    <option>35000</option>
+                                                    <option>40000</option>
+                                                    <option>45000</option>
+                                                    <option>50000</option>
+                                                    <option>55000</option>
+                                                    <option>60000</option>
+                                                    <option>65000</option>
+                                                    <option>70000</option>
+                                                    <option>75000</option>
+                                                    <option>80000</option>
+                                                    <option>85000</option>
+                                                    <option>90000</option>
+                                                    <option>95000</option>
+                                                    <option>100000</option>
+                                                    <option>105000</option>
+                                                    <option>110000</option>
+                                                    <option>115000</option>
+                                                    <option>120000</option>
+                                                    <option>125000</option>
+                                                    <option>130000</option>
+                                                    <option>135000</option>
+                                                    <option>140000</option>
+                                                    <option>145000</option>
+                                                    <option selected>150000</option>
+                                                    <option>155000</option>
+                                                    <option>160000</option>
+                                                    <option>165000</option>
+                                                    <option>170000</option>
+                                                    <option>175000</option>
+                                                    <option>180000</option>
+                                                    <option>185000</option>
+                                                    <option>190000</option>
+                                                    <option>195000</option>
+                                                    <option>200000</option>
+                                            </select>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="input-group input-group-sm">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text">RM</span>
+                                        </div>
+                                        <input id="insurance_amount_1" type="text" class="form-control" value="6386" disabled>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <input id="profit_rate_1" class="form-control form-control-sm" type="text" value="4.9" disabled>
+                                    </td>
+                                    <td>
+                                        <select id="tenure_option_1" class="form-control form-control-sm"  disabled>
+                                            <option>5</option>
+                                            <option>6</option>
+                                            <option>7</option>
+                                            <option>8</option>
+                                            <option>9</option>
+                                            <option>10</option>
+                                            <option>11</option>
+                                            <option>12</option>
+                                            <option>13</option>
+                                            <option>14</option>
+                                            <option>15</option>
+                                            <option>16</option>
+                                            <option>17</option>
+                                            <option>18</option>
+                                            <option>19</option>
+                                            <option>20</option>
+                                            <option>21</option>
+                                            <option>22</option>
+                                            <option>23</option>
+                                            <option>24</option>
+                                            <option>25</option>
+                                            <option>26</option>
+                                            <option>27</option>
+                                            <option>28</option>
+                                            <option>29</option>
+                                            <option selected>30</option>
+                                        </select>
+                                    </td>
+                                    <td>
+                                        <select id="start_year_option_1" class="form-control form-control-sm" disabled>
+                                            <option>1990</option>
+                                            <option>1995</option>
+                                            <option>2000</option>
+                                            <option>2005</option>
+                                            <option>2010</option>
+                                            <option>2011</option>
+                                            <option>2012</option>
+                                            <option>2013</option>
+                                            <option>2014</option>
+                                            <option>2015</option>
+                                            <option>2016</option>
+                                            <option>2017</option>
+                                            <option>2018</option>
+                                            <option selected>2019</option>
+                                            <option>2020</option>
+                                            <option>2021</option>
+                                            <option>2022</option>
+                                            <option>2023</option>
+                                            <option>2024</option>
+                                            <option>2025</option>
+                                            <option>2026</option>
+                                            <option>2027</option>
+                                            <option>2028</option>
+                                            <option>2029</option>
+                                            <option >2030</option>
+                                        </select>
+                                    </td>
+                                    <td>
+                                        <select id="start_month_option_1" class="form-control form-control-sm" disabled>
+                                            <option>1</option>
+                                            <option>2</option>
+                                            <option>3</option>
+                                            <option>4</option>
+                                            <option>5</option>
+                                            <option>6</option>
+                                            <option>7</option>
+                                            <option selected>8</option>
+                                            <option>9</option>
+                                            <option>10</option>
+                                            <option>11</option>
+                                            <option>12</option>
+                                        </select>
+                                    </td>
+                                    <td>
+                                        <select id="investment_period_option_1" class="form-control form-control-sm" disabled>
+                                            <option>5</option>
+                                            <option>6</option>
+                                            <option>7</option>
+                                            <option>8</option>
+                                            <option>9</option>
+                                            <option>10</option>
+                                            <option>11</option>
+                                            <option>12</option>
+                                            <option>13</option>
+                                            <option>14</option>
+                                            <option>15</option>
+                                            <option>16</option>
+                                            <option>17</option>
+                                            <option>18</option>
+                                            <option>19</option>
+                                            <option>20</option>
+                                            <option>21</option>
+                                            <option>22</option>
+                                            <option>23</option>
+                                            <option>24</option>
+                                            <option>25</option>
+                                            <option>26</option>
+                                            <option>27</option>
+                                            <option>28</option>
+                                            <option>29</option>
+                                            <option selected>30</option>
+                                        </select>
+                                    </td>
+                                    <td>                            
+                                        <div class="input-group input-group-sm">
+                                            <div class="input-group-prepend">
+                                            <span class="input-group-text">RM</span>
+                                            </div>
+                                            <input type="text" class="form-control" id="monthly_payment_amount_1" disabled>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <button id="button_detail_1" type="button" class="btn btn-outline-secondary btn-sm">Details</button>
+                                    </td>
+                                    <td>
+                                        <button id="button_remove_1" type="button" class="btn btn-outline-secondary btn-sm" disabled>Remove</button>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <div class="tab-pane fade" id="nav-rolling" role="tabpanel" aria-labelledby="nav-rolling-tab">Under construction...</div>
+                <div class="tab-pane fade" id="nav-without-loan" role="tabpanel" aria-labelledby="nav-without-loan-tab">Under construction...</div>
+            </div>
+        </div>
+    </div>
+    <!-- Modal -->
+    <div class="modal fade" id="modal-asb-dividend" tabindex="-1" role="dialog" aria-labelledby="modal-asb-dividendTitle" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-scrollable modal-dialog-centered modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="modal-asb-dividend-title">ASB Dividend</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="row modal-body">
+                    <div class="col-8 asb-modal-separate-line" style="align-self: center;">
+                        <canvas class="asb-canvas" id="canvas_modal" aria-label="ASB Dividend Rate" role="img"></canvas>
+                    </div>
+                    <div class="col-4 table-responsive asb-modal-height">
+                        <table id="table_dividend" class="table table-sm table-hover">
+                            <thead>
+                                <tr class="asb-top-border" style="font-size:small;">
+                                    <th width="50%" scope="col">Year</th>
+                                    <th width="50%" scope="col">Dividend Rate</th>
+                                </tr>
+                            </thead>
+                            <tbody id="table_dividend_body">
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary">Save changes</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="/bootstrap_4.3.1/js/bootstrap.min.js"></script>
+    <script src="amortization.js"></script>
+    <script src="asnb_main.js"></script>
+</body style="max-height: 100vh;">
+</html>

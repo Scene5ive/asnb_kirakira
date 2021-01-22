@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    
+    <!-- Chart JS -->
+    <script src="/node_modules/chart.js/dist/Chart.bundle.js"></script>
+
+    <link rel="stylesheet" href="/style.css" type="text/css">
+    <title>ChartJS</title>
+</head>
+<body>
+    <div class="container">
+        <div class="row">
+            <div class="col">
+                <canvas id="canvas" style="width: 400px; height:auto;" aria-label="ASB Chart" role="img"></canvas>
+            </div>
+        </div>
+        <div class="row asb-row-add-margin-button">
+            <div class="col-6 offset-6 asb-button-right">
+                <button id="button_show_default" type="button" class="btn btn-outline-secondary btn-sm">Show Default</button>
+                <button id="button_add" type="button" class="btn btn-outline-secondary btn-sm">Add Row</button>
+                <button id="button_save" type="button" class="btn btn-outline-secondary btn-sm">Save</button>
+                <button id="button_update_chart" type="button" class="btn btn-outline-primary btn-sm">Update Chart</button>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col table-responsive">
+                <table id="table" class="table table-sm table-hover">
+                    <thead>
+                        <tr style="font-size:small;">
+                            <th width="4%" scope="col">#</th>
+                            <th width="3%" scope="col">Show</th>
+                            <th width="18%" scope="col">Loan amount</th>
+                            <th width="12%" scope="col">Insurance amount</th>
+                            <th width="6%" scope="col">Profit rate</th>
+                            <th width="8%" scope="col">Tenure (years)</th>
+                            <th width="10%" scope="col">Start year</th>
+                            <th width="7%" scope="col">Start month</th>
+                            <th width="6%" scope="col">Investment period</th>
+                            <th width="14%" scope="col">Monthly payment</th>
+                            <th width="6%" scope="col"></th>
+                            <th width="6%" scope="col"></th>
+                        </tr>
+                    </thead>
+                    <tbody id="table_body">
+                        <tr>
+                            <th scope="row">1</th>
+                            <td class="asb-align-center">
+                                <input id="show_1" type="checkbox" checked>
+                            </td>
+                            <td>
+                                <div class="input-group input-group-sm">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text">RM</span>
+                                    </div>
+                                    <select id="loan_amount_option_1" class="custom-select" disabled>
+                                            <option>0</option>
+                                            <option>10000</option>
+                                            <option>20000</option>
+                                            <option>30000</option>
+                                            <option>40000</option>
+                                            <option>50000</option>
+                                            <option>100000</option>
+                                            <option selected>150000</option>
+                                            <option>200000</option>
+                                    </select>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="input-group input-group-sm">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text">RM</span>
+                                </div>
+                                <input id="insurance_amount_1" type="text" class="form-control" value="6386" disabled>
+                                </div>
+                            </td>
+                            <td>
+                                <input id="profit_rate_1" class="form-control form-control-sm" type="text" value="4.9" disabled>
+                            </td>
+                            <td>
+                                <select id="tenure_option_1" class="form-control form-control-sm"  disabled>
+                                    <option>5</option>
+                                    <option>6</option>
+                                    <option>7</option>
+                                    <option>8</option>
+                                    <option>9</option>
+                                    <option>10</option>
+                                    <option>11</option>
+                                    <option>12</option>
+                                    <option>13</option>
+                                    <option>14</option>
+                                    <option>15</option>
+                                    <option>16</option>
+                                    <option>17</option>
+                                    <option>18</option>
+                                    <option>19</option>
+                                    <option>20</option>
+                                    <option>21</option>
+                                    <option>22</option>
+                                    <option>23</option>
+                                    <option>24</option>
+                                    <option>25</option>
+                                    <option>26</option>
+                                    <option>27</option>
+                                    <option>28</option>
+                                    <option>29</option>
+                                    <option selected>30</option>
+                                </select>
+                            </td>
+                            <td>
+                                <select id="start_year_option_1" class="form-control form-control-sm" disabled>
+                                    <option>1990</option>
+                                    <option>1995</option>
+                                    <option>2000</option>
+                                    <option>2005</option>
+                                    <option>2010</option>
+                                    <option>2011</option>
+                                    <option>2012</option>
+                                    <option>2013</option>
+                                    <option>2014</option>
+                                    <option>2015</option>
+                                    <option>2016</option>
+                                    <option>2017</option>
+                                    <option>2018</option>
+                                    <option selected>2019</option>
+                                    <option>2020</option>
+                                    <option>2021</option>
+                                    <option>2022</option>
+                                    <option>2023</option>
+                                    <option>2024</option>
+                                    <option>2025</option>
+                                    <option>2026</option>
+                                    <option>2027</option>
+                                    <option>2028</option>
+                                    <option>2029</option>
+                                    <option >2030</option>
+                                </select>
+                            </td>
+                            <td>
+                                <select id="start_month_option_1" class="form-control form-control-sm" disabled>
+                                    <option>1</option>
+                                    <option>2</option>
+                                    <option>3</option>
+                                    <option>4</option>
+                                    <option>5</option>
+                                    <option>6</option>
+                                    <option>7</option>
+                                    <option selected>8</option>
+                                    <option>9</option>
+                                    <option>10</option>
+                                    <option>11</option>
+                                    <option>12</option>
+                                </select>
+                            </td>
+                            <td>
+                                <select id="investment_period_option_1" class="form-control form-control-sm" disabled>
+                                    <option>5</option>
+                                    <option>6</option>
+                                    <option>7</option>
+                                    <option>8</option>
+                                    <option>9</option>
+                                    <option>10</option>
+                                    <option>11</option>
+                                    <option>12</option>
+                                    <option>13</option>
+                                    <option>14</option>
+                                    <option>15</option>
+                                    <option>16</option>
+                                    <option>17</option>
+                                    <option>18</option>
+                                    <option>19</option>
+                                    <option>20</option>
+                                    <option>21</option>
+                                    <option>22</option>
+                                    <option>23</option>
+                                    <option>24</option>
+                                    <option>25</option>
+                                    <option>26</option>
+                                    <option>27</option>
+                                    <option>28</option>
+                                    <option>29</option>
+                                    <option selected>30</option>
+                                </select>
+                            </td>
+                            <td>                            
+                                <div class="input-group input-group-sm">
+                                    <div class="input-group-prepend">
+                                    <span class="input-group-text">RM</span>
+                                    </div>
+                                    <input type="text" class="form-control" id="monthly_payment_amount_1" disabled>
+                                </div>
+                            </td>
+                            <td>
+                                <button id="button_detail_1" type="button" class="btn btn-outline-secondary btn-sm">Details</button>
+                            </td>
+                            <td>
+                                <button id="button_remove_1" type="button" class="btn btn-outline-secondary btn-sm">Remove</button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    <script src="amortization.js"></script>
+    <script src="asnb_main.js"></script>
+</body>
+</html>
